@@ -1,29 +1,53 @@
 import os
 import random
 import shutil
-import ast
 from faker import Faker
 import file_operations
 
 
 OUTPUT_FOLDER = "output_cards"
-SKILLS_FILE = "skills_list.txt"
-MAPPING_FILE = "letters_mapping.txt"
 TEMPLATE_FILE = "src/charsheet.svg"
 CARDS_COUNT = 10
 
+SKILLS = [
+    "Стремительный прыжок",
+    "Электрический выстрел",
+    "Ледяной удар",
+    "Стремительный удар",
+    "Кислотный взгляд",
+    "Тайный побег",
+    "Ледяной выстрел",
+    "Огненный заряд"
+] 
+   
 
-def load_skills(skills_file):
-    with open(skills_file, encoding="utf-8") as f:
-        return f.read().splitlines()
+MAPPING = { 
+    'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
+    'г': 'г͒͠', 'д': 'д̋', 'е': 'е͠',
+    'ё': 'ё͒͠', 'ж': 'ж͒', 'з': 'з̋̋͠',
+    'и': 'и', 'й': 'й͒͠', 'к': 'к̋̋',
+    'л': 'л̋͠', 'м': 'м͒͠', 'н': 'н͒',
+    'о': 'о̋', 'п': 'п̋͠', 'р': 'р̋͠',
+    'с': 'с͒', 'т': 'т͒', 'у': 'у͒͠',
+    'ф': 'ф̋̋͠', 'х': 'х͒͠', 'ц': 'ц̋',
+    'ч': 'ч̋͠', 'ш': 'ш͒͠', 'щ': 'щ̋',
+    'ъ': 'ъ̋͠', 'ы': 'ы̋͠', 'ь': 'ь̋',
+    'э': 'э͒͠͠', 'ю': 'ю̋͠', 'я': 'я̋',
+    'А': 'А͠', 'Б': 'Б̋', 'В': 'В͒͠',
+    'Г': 'Г͒͠', 'Д': 'Д̋', 'Е': 'Е',
+    'Ё': 'Ё͒͠', 'Ж': 'Ж͒', 'З': 'З̋̋͠',
+    'И': 'И', 'Й': 'Й͒͠', 'К': 'К̋̋',
+    'Л': 'Л̋͠', 'М': 'М͒͠', 'Н': 'Н͒',
+    'О': 'О̋', 'П': 'П̋͠', 'Р': 'Р̋͠',
+    'С': 'С͒', 'Т': 'Т͒', 'У': 'У͒͠',
+    'Ф': 'Ф̋̋͠', 'Х': 'Х͒͠', 'Ц': 'Ц̋',
+    'Ч': 'Ч̋͠', 'Ш': 'Ш͒͠', 'Щ': 'Щ̋',
+    'Ъ': 'Ъ̋͠', 'Ы': 'Ы̋͠', 'Ь': 'Ь̋',
+    'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
+    ' ': ' '
+}
 
-
-def load_mapping(mapping_file):
-    with open(mapping_file, encoding="utf-8") as f:
-        mapping_text = f.read().strip()
-        return ast.literal_eval(mapping_text)
-
-
+  
 def style_skills(skills, mapping):
     runic_skills = []
     for skill in skills:
@@ -88,14 +112,15 @@ def main():
     prepare_output_folder(OUTPUT_FOLDER)
     
     
-    skills = load_skills(SKILLS_FILE)
-    mapping = load_mapping(MAPPING_FILE)
-    runic_skills = style_skills(skills, mapping)
+    runic_skills = style_skills(SKILLS, MAPPING)
     
     
     for number in range(1, CARDS_COUNT + 1):
         context = generate_character(faker, runic_skills)
-        filename = os.path.join(OUTPUT_FOLDER, "charsheet-{}.svg".format(number))
+        filename = os.path.join(
+            OUTPUT_FOLDER,
+            f"charsheet-{number}.svg"
+        )
         save_card(TEMPLATE_FILE, filename, context)
         
         
