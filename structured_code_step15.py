@@ -104,20 +104,11 @@ def style_skills(skills, mapping):
 
 def generate_character(faker, runic_skills):
     fake_name = faker.name()
-    first_name, last_name = fake_name.split(maxsplit=1)
+    first_name, last_name = fake_name.split
     town = faker.city()
     job = faker.job()
-
     
-    stats = {
-        "strength": random.randint(3, 18),
-        "agility": random.randint(3, 18),
-        "endurance": random.randint(3, 18),
-        "intelligence": random.randint(3, 18),
-        "luck": random.randint(3, 18)
-    }
-    
-    selected_skills = random.sample(runic_skills, 3)
+    skill_1, skill_2, skill_3 = random.sample(runic_skills, 3)
    
     
     context = {
@@ -125,14 +116,14 @@ def generate_character(faker, runic_skills):
         "last_name": last_name,
         "town": town,
         "job": job,
-        "strength": stats["strength"],
-        "agility": stats["agility"],
-        "endurance": stats["endurance"],
-        "intelligence": ["intelligence"],
-        "luck": stats ["luck"], 
-        "skill_1": selected_skills[0],
-        "skill_2": selected_skills[1],
-        "skill_3": selected_skills[2]
+        "strength": random.randint(3, 18),
+        "agility": random.randint(3, 18),
+        "endurance": random.randint(3, 18),
+        "intelligence": random.randint(3, 18),
+        "luck": random.randint(3, 18), 
+        "skill_1": skill_1,
+        "skill_2": skill_2,
+        "skill_3": skill_3
     }
     return context
 
