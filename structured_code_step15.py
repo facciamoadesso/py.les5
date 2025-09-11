@@ -17,15 +17,9 @@ SKILLS = [
     "Тайный побег",
     "Ледяной выстрел",
     "Огненный заряд"
-<<<<<<< HEAD
 ]
-
-MAPPING = {
-=======
-] 
    
 MAPPING = { 
->>>>>>> 2de1c585877d28686d9ea126ca95d811f2d665f4
     'а': 'а͠',
     'б': 'б̋',
     'в': 'в͒͠',
@@ -99,11 +93,7 @@ MAPPING = {
 def style_skills(skills, mapping):
     runic_skills = []
     for skill in skills:
-<<<<<<< HEAD
         styled_skill = ""
-=======
-        styled_skills = ""
->>>>>>> 2de1c585877d28686d9ea126ca95d811f2d665f4
         for letter in skill:
             styled_skill += mapping.get(letter, letter)
         runic_skills.append(styled_skill)
@@ -117,13 +107,8 @@ def generate_character(faker, runic_skills):
     job = faker.job()
 
     skill_1, skill_2, skill_3 = random.sample(runic_skills, 3)
-<<<<<<< HEAD
 
     character_data = {
-=======
-   
-    context = {
->>>>>>> 2de1c585877d28686d9ea126ca95d811f2d665f4
         "first_name": first_name,
         "last_name": last_name,
         "town": town,
