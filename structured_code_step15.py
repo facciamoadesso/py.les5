@@ -22,28 +22,72 @@ SKILLS = [
    
 
 MAPPING = { 
-    'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
-    'г': 'г͒͠', 'д': 'д̋', 'е': 'е͠',
-    'ё': 'ё͒͠', 'ж': 'ж͒', 'з': 'з̋̋͠',
-    'и': 'и', 'й': 'й͒͠', 'к': 'к̋̋',
-    'л': 'л̋͠', 'м': 'м͒͠', 'н': 'н͒',
-    'о': 'о̋', 'п': 'п̋͠', 'р': 'р̋͠',
-    'с': 'с͒', 'т': 'т͒', 'у': 'у͒͠',
-    'ф': 'ф̋̋͠', 'х': 'х͒͠', 'ц': 'ц̋',
-    'ч': 'ч̋͠', 'ш': 'ш͒͠', 'щ': 'щ̋',
-    'ъ': 'ъ̋͠', 'ы': 'ы̋͠', 'ь': 'ь̋',
-    'э': 'э͒͠͠', 'ю': 'ю̋͠', 'я': 'я̋',
-    'А': 'А͠', 'Б': 'Б̋', 'В': 'В͒͠',
-    'Г': 'Г͒͠', 'Д': 'Д̋', 'Е': 'Е',
-    'Ё': 'Ё͒͠', 'Ж': 'Ж͒', 'З': 'З̋̋͠',
-    'И': 'И', 'Й': 'Й͒͠', 'К': 'К̋̋',
-    'Л': 'Л̋͠', 'М': 'М͒͠', 'Н': 'Н͒',
-    'О': 'О̋', 'П': 'П̋͠', 'Р': 'Р̋͠',
-    'С': 'С͒', 'Т': 'Т͒', 'У': 'У͒͠',
-    'Ф': 'Ф̋̋͠', 'Х': 'Х͒͠', 'Ц': 'Ц̋',
-    'Ч': 'Ч̋͠', 'Ш': 'Ш͒͠', 'Щ': 'Щ̋',
-    'Ъ': 'Ъ̋͠', 'Ы': 'Ы̋͠', 'Ь': 'Ь̋',
-    'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
+    'а': 'а͠',
+    'б': 'б̋',
+    'в': 'в͒͠',
+    'г': 'г͒͠',
+    'д': 'д̋',
+    'е': 'е͠',
+    'ё': 'ё͒͠',
+    'ж': 'ж͒',
+    'з': 'з̋̋͠',
+    'и': 'и',
+    'й': 'й͒͠',
+    'к': 'к̋̋',
+    'л': 'л̋͠',
+    'м': 'м͒͠',
+    'н': 'н͒',
+    'о': 'о̋',
+    'п': 'п̋͠',
+    'р': 'р̋͠',
+    'с': 'с͒',
+    'т': 'т͒',
+    'у': 'у͒͠',
+    'ф': 'ф̋̋͠',
+    'х': 'х͒͠',
+    'ц': 'ц̋',
+    'ч': 'ч̋͠',
+    'ш': 'ш͒͠',
+    'щ': 'щ̋',
+    'ъ': 'ъ̋͠',
+    'ы': 'ы̋͠',
+    'ь': 'ь̋',
+    'э': 'э͒͠͠',
+    'ю': 'ю̋͠',
+    'я': 'я̋',
+    'А': 'А͠',
+    'Б': 'Б̋',
+    'В': 'В͒͠',
+    'Г': 'Г͒͠',
+    'Д': 'Д̋',
+    'Е': 'Е',
+    'Ё': 'Ё͒͠',
+    'Ж': 'Ж͒',
+    'З': 'З̋̋͠',
+    'И': 'И',
+    'Й': 'Й͒͠',
+    'К': 'К̋̋',
+    'Л': 'Л̋͠',
+    'М': 'М͒͠',
+    'Н': 'Н͒',
+    'О': 'О̋',
+    'П': 'П̋͠',
+    'Р': 'Р̋͠',
+    'С': 'С͒',
+    'Т': 'Т͒',
+    'У': 'У͒͠',
+    'Ф': 'Ф̋̋͠',
+    'Х': 'Х͒͠',
+    'Ц': 'Ц̋',
+    'Ч': 'Ч̋͠',
+    'Ш': 'Ш͒͠',
+    'Щ': 'Щ̋',
+    'Ъ': 'Ъ̋͠',
+    'Ы': 'Ы̋͠',
+    'Ь': 'Ь̋',
+    'Э': 'Э͒͠͠',
+    'Ю': 'Ю̋͠',
+    'Я': 'Я̋',
     ' ': ' '
 }
 
@@ -60,13 +104,10 @@ def style_skills(skills, mapping):
 
 def generate_character(faker, runic_skills):
     fake_name = faker.name()
-    parts = fake_name.split()
-    last_name = parts[0] if len(parts) > 0 else ""
-    first_name = parts[1] if len(parts) > 1 else ""
-    fake_city = faker.city()
-    fake_job = faker.job()
-    
-    
+    first_name, last_name = fake_name.split(maxsplit=1)
+    town = faker.city()
+    job = faker.job()
+
     
     stats = {
         "strength": random.randint(3, 18),
@@ -76,21 +117,22 @@ def generate_character(faker, runic_skills):
         "luck": random.randint(3, 18)
     }
     
-    if len(runic_skills) >= 3:
-        selected_skills = random.sample(runic_skills, 3)
-    else:
-        selected_skills = runic_skills[:]
-    
+    selected_skills = random.sample(runic_skills, 3)
+   
     
     context = {
         "first_name": first_name,
         "last_name": last_name,
-        "town": fake_city,
-        "job": fake_job,
-        **stats,
-        "skill_1": selected_skills[0] if len(selected_skills) > 0 else "",
-        "skill_2": selected_skills[1] if len(selected_skills) > 1 else "",
-        "skill_3": selected_skills[2] if len(selected_skills) > 2 else ""
+        "town": town,
+        "job": job,
+        "strength": stats["strength"],
+        "agility": stats["agility"],
+        "endurance": stats["endurance"],
+        "intelligence": ["intelligence"],
+        "luck": stats ["luck"], 
+        "skill_1": selected_skills[0],
+        "skill_2": selected_skills[1],
+        "skill_3": selected_skills[2]
     }
     return context
 
@@ -107,20 +149,13 @@ def prepare_output_folder(folder):
     
 def main():
     faker = Faker("ru_RU")
-        
-        
     prepare_output_folder(OUTPUT_FOLDER)
-    
     
     runic_skills = style_skills(SKILLS, MAPPING)
     
-    
     for number in range(1, CARDS_COUNT + 1):
         context = generate_character(faker, runic_skills)
-        filename = os.path.join(
-            OUTPUT_FOLDER,
-            f"charsheet-{number}.svg"
-        )
+        filename = os.path.join(OUTPUT_FOLDER, f"charsheet-{number}.svg")
         save_card(TEMPLATE_FILE, filename, context)
         
         
