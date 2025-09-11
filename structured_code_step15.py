@@ -96,15 +96,15 @@ def style_skills(skills, mapping):
     runic_skills = []
     for skill in skills:
         styled = ""
-        for ch in skill:
-            styled += mapping.get(ch, ch)
-        runic_skills.append(styled)
+        for letter in skill:
+            styled_skill += mapping.get(letter, letter)
+        runic_skills.append(styled_skill)
     return runic_skills
     
 
 def generate_character(faker, runic_skills):
     fake_name = faker.name()
-    first_name, last_name = fake_name.split
+    first_name, last_name = fake_name.split(maxsplit=1)
     town = faker.city()
     job = faker.job()
     
