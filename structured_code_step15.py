@@ -4,7 +4,6 @@ import shutil
 from faker import Faker
 import file_operations
 
-
 OUTPUT_FOLDER = "output_cards"
 TEMPLATE_FILE = "src/charsheet.svg"
 CARDS_COUNT = 10
@@ -18,10 +17,9 @@ SKILLS = [
     "Тайный побег",
     "Ледяной выстрел",
     "Огненный заряд"
-] 
-   
+]
 
-MAPPING = { 
+MAPPING = {
     'а': 'а͠',
     'б': 'б̋',
     'в': 'в͒͠',
@@ -91,27 +89,26 @@ MAPPING = {
     ' ': ' '
 }
 
-  
+
 def style_skills(skills, mapping):
     runic_skills = []
     for skill in skills:
-        styled = ""
+        styled_skill = ""
         for letter in skill:
             styled_skill += mapping.get(letter, letter)
         runic_skills.append(styled_skill)
     return runic_skills
-    
+
 
 def generate_character(faker, runic_skills):
     fake_name = faker.name()
     first_name, last_name = fake_name.split(maxsplit=1)
     town = faker.city()
     job = faker.job()
-    
+
     skill_1, skill_2, skill_3 = random.sample(runic_skills, 3)
-   
-    
-    context = {
+
+    character_data = {
         "first_name": first_name,
         "last_name": last_name,
         "town": town,
@@ -120,35 +117,35 @@ def generate_character(faker, runic_skills):
         "agility": random.randint(3, 18),
         "endurance": random.randint(3, 18),
         "intelligence": random.randint(3, 18),
-        "luck": random.randint(3, 18), 
+        "luck": random.randint(3, 18),
         "skill_1": skill_1,
         "skill_2": skill_2,
         "skill_3": skill_3
     }
-    return context
+    return character_data
 
 
 def save_card(template_file, output_file, context):
     file_operations.render_template(template_file, output_file, context)
-   
-   
+
+
 def prepare_output_folder(folder):
     if os.path.exists(folder):
         shutil.rmtree(folder)
     os.makedirs(folder)
-    
-    
+
+
 def main():
     faker = Faker("ru_RU")
     prepare_output_folder(OUTPUT_FOLDER)
-    
+
     runic_skills = style_skills(SKILLS, MAPPING)
-    
+
     for number in range(1, CARDS_COUNT + 1):
-        context = generate_character(faker, runic_skills)
+        character = generate_character(faker, runic_skills)
         filename = os.path.join(OUTPUT_FOLDER, f"charsheet-{number}.svg")
-        save_card(TEMPLATE_FILE, filename, context)
-        
-        
+        save_card(TEMPLATE_FILE, filename, character)
+
+
 if __name__ == "__main__":
     main()
