@@ -20,7 +20,6 @@ SKILLS = [
     "Огненный заряд"
 ] 
    
-
 MAPPING = { 
     'а': 'а͠',
     'б': 'б̋',
@@ -95,7 +94,7 @@ MAPPING = {
 def style_skills(skills, mapping):
     runic_skills = []
     for skill in skills:
-        styled = ""
+        styled_skills = ""
         for letter in skill:
             styled_skill += mapping.get(letter, letter)
         runic_skills.append(styled_skill)
@@ -110,7 +109,6 @@ def generate_character(faker, runic_skills):
     
     skill_1, skill_2, skill_3 = random.sample(runic_skills, 3)
    
-    
     context = {
         "first_name": first_name,
         "last_name": last_name,
